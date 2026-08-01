@@ -1,0 +1,96 @@
+// src/data/services.ts
+
+import { Service } from '@/types';
+
+export const services: Service[] = [
+  {
+    id: 'svc-1',
+    title: 'AI/ML Consulting',
+    description: 'End-to-end ML system design, from problem framing to production deployment. Specializing in LLM applications, MLOps, and scalable inference.',
+    icon: '🧠',
+    features: [
+      'LLM fine-tuning, RAG, and agent architectures',
+      'ML platform design (feature stores, experiment tracking, model registry)',
+      'High-performance model serving (Triton, vLLM, TensorRT)',
+      'MLOps pipeline implementation and CI/CD for ML',
+      'Model optimization: quantization, distillation, pruning',
+      'Responsible AI: red-teaming, bias evaluation, guardrails',
+    ],
+    priceRange: '$200-400/hr',
+  },
+  {
+    id: 'svc-2',
+    title: 'Cybersecurity Assessment',
+    description: 'Offensive security testing and defensive architecture review. From red team exercises to secure system design.',
+    icon: '🔒',
+    features: [
+      'Red team engagements (MITRE ATT&CK aligned)',
+      'Application penetration testing (web, mobile, API)',
+      'Cloud security assessment (AWS, GCP, Azure, Kubernetes)',
+      'eBPF-based runtime security implementation',
+      'Secure code review and threat modeling',
+      'Incident response planning and tabletop exercises',
+    ],
+    priceRange: '$250-500/hr',
+  },
+  {
+    id: 'svc-3',
+    title: 'Platform Engineering',
+    description: 'Building developer platforms, CI/CD systems, and infrastructure automation that accelerate delivery.',
+    icon: '⚙️',
+    features: [
+      'Internal developer platform (Backstage, custom)',
+      'GitOps workflows with ArgoCD/Flux',
+      'Multi-cluster Kubernetes management',
+      'Infrastructure as Code (Terraform, Pulumi, Crossplane)',
+      'Observability stacks (Grafana, Prometheus, OpenTelemetry)',
+      'Self-service infrastructure for product teams',
+    ],
+    priceRange: '$180-350/hr',
+  },
+  {
+    id: 'svc-4',
+    title: 'Technical Advisory',
+    description: 'Strategic guidance for engineering leadership on architecture, hiring, and technology decisions.',
+    icon: '🎯',
+    features: [
+      'Architecture review and decision records',
+      'Technical due diligence for investments/acquisitions',
+      'Engineering org design and career ladder creation',
+      'Technology strategy and build vs. buy analysis',
+      'Interview process design and hiring bar calibration',
+      'Incident retrospectives and reliability improvements',
+    ],
+    priceRange: '$300-600/hr',
+  },
+  {
+    id: 'svc-5',
+    title: 'Training & Workshops',
+    description: 'Hands-on technical training for engineering teams on modern tools and practices.',
+    icon: '📚',
+    features: [
+      'LLM application development (2-3 day workshops)',
+      'Kubernetes security hardening (1-2 days)',
+      'eBPF for observability and security (2 days)',
+      'MLOps best practices (2 days)',
+      'Secure coding practices (1 day)',
+      'Custom curriculum for your stack',
+    ],
+    priceRange: '$5,000-15,000/workshop',
+  },
+  {
+    id: 'svc-6',
+    title: 'Open Source Sponsorship',
+    description: 'Dedicated maintenance, feature development, and support for critical open source dependencies.',
+    icon: '🌿',
+    features: [
+      'Priority bug fixes and security patches',
+      'Feature development aligned with your roadmap',
+      'Dedicated support channel (Slack/Discord)',
+      'Migration assistance for major versions',
+      'Performance optimization for your workloads',
+      'Upstream contribution of fixes and features',
+    ],
+    priceRange: 'Custom retainer',
+  },
+];

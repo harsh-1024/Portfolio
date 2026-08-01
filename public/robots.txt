@@ -1,0 +1,17 @@
+# Robots.txt for portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://alexchen.dev/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Disallow private/admin paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.xml$

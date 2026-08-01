@@ -1,0 +1,219 @@
+/* src/styles/globals.css */
+
+@import './variables.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, sans-serif;
+    --font-jetbrains: 'JetBrains Mono', monospace;
+    --font-cal: 'Cal Sans', 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  ::selection {
+    @apply bg-[var(--accent-500)] text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[var(--border-light)] rounded-full hover:bg-[var(--text-muted)];
+  }
+
+  ::-webkit-scrollbar-corner {
+    @apply bg-transparent;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-[var(--accent-500)] ring-offset-2 ring-offset-[var(--bg-primary)];
+  }
+
+  .dark :focus-visible {
+    @apply ring-offset-[var(--bg-primary)];
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-[var(--section-max-width)] mx-auto px-[var(--section-padding-x)] md:px-[var(--section-padding-x-md)] lg:px-[var(--section-padding-x-lg)] xl:px-[var(--section-padding-x-xl)];
+  }
+
+  .section {
+    @apply py-[var(--section-spacing-y)] lg:py-[var(--section-spacing-y-lg)];
+  }
+
+  .section-title {
+    @apply font-display font-bold text-[var(--text-primary)] tracking-tight;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .section-subtitle {
+    @apply text-[var(--text-muted)] mt-4 max-w-2xl;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 ease-[cubic-bezier(0.19,1,0.22,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-500)] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-[var(--accent-500)] text-white hover:shadow-glow hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-transparent border border-[var(--border-light)] text-[var(--text-primary)] hover:bg-[var(--surface-hover)] hover:border-[var(--accent-500)] hover:text-[var(--accent-500)] active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] active:scale-[0.98];
+  }
+
+  .card {
+    @apply bg-[var(--surface)] border border-[var(--border-light)] rounded-2xl shadow-card transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)];
+  }
+
+  .card-hover {
+    @apply card hover:shadow-card-hover hover:border-[var(--accent-500)] hover:-translate-y-2;
+  }
+
+  .glass {
+    @apply bg-white/80 dark:bg-gray-950/80 backdrop-blur-glass border border-[var(--border-light)] dark:border-[var(--border-dark)];
+  }
+
+  .glass-strong {
+    @apply bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl border border-[var(--border-light)] dark:border-[var(--border-dark)];
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-[var(--accent-500)] via-[var(--accent-600)] to-[var(--accent-700)] bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+    @apply rounded-2xl;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--accent-500), var(--accent-600), var(--accent-700));
+    opacity: 0;
+    transition: opacity 300ms ease;
+    z-index: -1;
+  }
+
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3.5 bg-[var(--surface)] border border-[var(--border-light)] rounded-xl text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-500)] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .label-floating {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] transition-all duration-200 pointer-events-none origin-left;
+  }
+
+  .input-wrapper:focus-within .label-floating,
+  .input-wrapper:has(input:not(:placeholder-shown)) .label-floating,
+  .input-wrapper:has(textarea:not(:placeholder-shown)) .label-floating {
+    @apply -translate-y-6 scale-90 text-[var(--accent-500)];
+  }
+
+  .tag {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--surface-hover)] border border-[var(--border-light)] text-[var(--text-secondary)];
+  }
+
+  .tag-accent {
+    @apply tag bg-[rgba(var(--accent-500-rgb),0.1)] border-[rgba(var(--accent-500-rgb),0.2)] text-[var(--accent-500)];
+  }
+
+  .icon-button {
+    @apply inline-flex items-center justify-center p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] transition-all duration-200;
+  }
+
+  .icon-button-accent {
+    @apply icon-button text-[var(--accent-500)] hover:bg-[rgba(var(--accent-500-rgb),0.1)];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .slide-up-in {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .blur-in {
+    animation: blurIn 0.5s ease-out forwards;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gradient-mask {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+}
