@@ -3,8 +3,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { ReactNode, useEffect, useState } from 'react';
-import { useCommandPalette } from '@/hooks/useCommandPalette';
+import { ReactNode, useState } from 'react';
 
 const CommandPalette = dynamic(
   () => import('@/components/command-palette/CommandPalette').then(m => m.CommandPalette),
@@ -12,12 +11,15 @@ const CommandPalette = dynamic(
 );
 
 export function AdvancedFeatures({ children }: { children: ReactNode }) {
-  const commandPalette = useCommandPalette();
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   return (
     <>
       {children}
-      <CommandPalette isOpen={commandPalette.isOpen} onClose={commandPalette.close} />
+      <CommandPalette 
+        isOpen={isCommandPaletteOpen} 
+        onClose={() => setIsCommandPaletteOpen(false)} 
+      />
     </>
   );
 }

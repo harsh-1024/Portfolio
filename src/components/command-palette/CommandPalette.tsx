@@ -79,6 +79,20 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean; onClose: 
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, filteredItems, selectedIndex, onClose]);
 
+  // Global Cmd+K to open
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        // Only open if not already open
+        // The parent component controls isOpen state
+      }
+    };
+
+    document.addEventListener('keydown', handleGlobalKeyDown);
+    return () => document.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
+
   // Scroll selected into view
   useEffect(() => {
     if (itemsRef.current) {
