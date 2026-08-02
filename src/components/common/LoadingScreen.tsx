@@ -15,6 +15,7 @@ export function LoadingScreen({ minDuration = 800, children }: LoadingScreenProp
   const [isLoaded, setIsLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const startTime = useRef<number>(Date.now());
+  const unmountedRef = useRef(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,18 +23,25 @@ export function LoadingScreen({ minDuration = 800, children }: LoadingScreenProp
       const remaining = Math.max(0, minDuration - elapsed);
       
       setTimeout(() => {
+        if (unmountedRef.current) return;
         setIsLoaded(true);
-        setTimeout(() => setShowLoader(false), 500);
+        setTimeout(() => {
+          if (unmountedRef.current) return;
+          setShowLoader(false);
+        }, 500);
       }, remaining);
     }, 0);
 
-    return () => clearTimeout(timer);
+    return () => {
+      unmountedRef.current = true;
+      clearTimeout(timer);
+    };
   }, [minDuration]);
 
   if (!showLoader) return null;
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       <motion.div
         initial={false}
         animate={{ opacity: isLoaded ? 0 : 1 }}

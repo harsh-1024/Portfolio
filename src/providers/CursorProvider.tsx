@@ -16,12 +16,8 @@ export function CursorProvider({ children }: { children: ReactNode }) {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
   useEffect(() => {
-    if (reducedMotion) return;
+    if (!mounted || reducedMotion) return;
     
     const cursor = document.getElementById('custom-cursor');
     const cursorRing = document.getElementById('custom-cursor-ring');
@@ -37,9 +33,9 @@ export function CursorProvider({ children }: { children: ReactNode }) {
     
     updatePosition();
     return () => cancelAnimationFrame(rafId);
-  }, [position, isHovering, reducedMotion]);
+  }, [position, isHovering, reducedMotion, mounted]);
 
-  if (reducedMotion) return <>{children}</>;
+  if (!mounted || reducedMotion) return <>{children}</>;
 
   return (
     <>
