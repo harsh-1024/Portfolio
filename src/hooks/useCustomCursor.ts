@@ -46,14 +46,13 @@ export function useCustomCursor() {
     if (reducedMotion || !mounted) return;
 
     const animate = () => {
-      const current = position;
-      const target = targetRef.current;
-
-      const lerpFactor = 0.15;
-      const newX = current.x + (target.x - current.x) * lerpFactor;
-      const newY = current.y + (target.y - current.y) * lerpFactor;
-
-      setPosition({ x: newX, y: newY });
+      setPosition(current => {
+        const target = targetRef.current;
+        const lerpFactor = 0.15;
+        const newX = current.x + (target.x - current.x) * lerpFactor;
+        const newY = current.y + (target.y - current.y) * lerpFactor;
+        return { x: newX, y: newY };
+      });
       animationRef.current = requestAnimationFrame(animate);
     };
 

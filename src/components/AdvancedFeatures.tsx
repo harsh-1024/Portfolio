@@ -4,11 +4,7 @@
 
 import dynamic from 'next/dynamic';
 import { ReactNode, useEffect, useState } from 'react';
-
-const CursorProvider = dynamic(
-  () => import('@/providers/CursorProvider').then(m => m.CursorProvider),
-  { ssr: false }
-);
+import { useCommandPalette } from '@/hooks/useCommandPalette';
 
 const CommandPalette = dynamic(
   () => import('@/components/command-palette/CommandPalette').then(m => m.CommandPalette),
@@ -16,24 +12,12 @@ const CommandPalette = dynamic(
 );
 
 export function AdvancedFeatures({ children }: { children: ReactNode }) {
-  const [useCommandPalette, setUseCommandPalette] = useState<{ isOpen: boolean; close: () => void } | null>(null);
-
-  useEffect(() => {
-    import('@/hooks/useCommandPalette').then(m => {
-      setUseCommandPalette(m.useCommandPalette());
-    });
-  }, []);
-
-  if (!useCommandPalette) {
-    return <CursorProvider>{children}</CursorProvider>;
-  }
-
-  const { isOpen, close } = useCommandPalette;
+  const commandPalette = useCommandPalette();
 
   return (
-    <CursorProvider>
+    <>
       {children}
-      <CommandPalette isOpen={isOpen} onClose={close} />
-    </CursorProvider>
+      <CommandPalette isOpen={commandPalette.isOpen} onClose={commandPalette.close} />
+    </>
   );
 }

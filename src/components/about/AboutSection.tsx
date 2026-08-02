@@ -4,10 +4,15 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { ScrollReveal } from '@/components/common/ScrollReveal';
 import { AnimatedCounter } from '@/components/common/AnimatedCounter';
 import { profile } from '@/data/profile';
 import { fadeUp, staggerContainer } from '@/lib/animations';
+
+// import { ScrollReveal } from '@/components/common/ScrollReveal';
+
+const ScrollReveal = ({ children, className, ...props }: { children: React.ReactNode; className?: string }) => (
+  <div className={cn(className)} {...props}>{children}</div>
+);
 
 const aboutStats = [
   { value: 50, suffix: '+', label: 'Projects Completed' },
@@ -53,7 +58,7 @@ export function AboutSection() {
     <section id="about" className="section" aria-label="About Me">
       <div className="container-custom">
         {/* Section Header */}
-        <ScrollReveal variant="fadeUp" className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--accent-500)]/10 text-[var(--accent-500)] text-sm font-medium mb-4">
             About Me
           </span>
@@ -67,7 +72,7 @@ export function AboutSection() {
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left: Image/Visual */}
-          <ScrollReveal variant="fadeRight" delay={100}>
+          <ScrollReveal>
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--accent-500)]/20 to-[var(--accent-600)]/20 relative">
                 <div className="absolute inset-0 bg-[url('/images/patterns/grid.svg')] opacity-5" />
@@ -113,7 +118,7 @@ export function AboutSection() {
           {/* Right: Content */}
           <div className="space-y-10">
             {/* Bio */}
-            <ScrollReveal variant="fadeLeft" delay={200}>
+            <ScrollReveal>
               <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Who Am I</h3>
               <div className="prose prose-neutral dark:prose-invert max-w-none text-[var(--text-secondary)] leading-relaxed">
                 <p>{profile.bio.split('\n\n')[0]}</p>
@@ -122,7 +127,7 @@ export function AboutSection() {
             </ScrollReveal>
 
             {/* Current Focus */}
-            <ScrollReveal variant="fadeLeft" delay={300}>
+            <ScrollReveal>
               <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Current Focus</h3>
               <div className="grid sm:grid-cols-2 gap-3">
                 {[
@@ -152,7 +157,7 @@ export function AboutSection() {
             </ScrollReveal>
 
             {/* Timeline */}
-            <ScrollReveal variant="fadeLeft" delay={400}>
+            <ScrollReveal>
               <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Journey</h3>
               <div className="relative pl-6 border-l border-[var(--border-light)]">
                 {timelineData.map((item, index) => (
@@ -182,7 +187,7 @@ export function AboutSection() {
             </ScrollReveal>
 
             {/* Fun Facts / Stats */}
-            <ScrollReveal variant="fadeUp" delay={500} className="mt-10">
+            <ScrollReveal className="mt-10">
               <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
                 {aboutStats.map((stat, index) => (
                   <motion.div

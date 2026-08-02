@@ -12,29 +12,51 @@ import { TestimonialsSection } from '@/components/testimonials/TestimonialsSecti
 import { ContactSection } from '@/components/contact/ContactSection';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { AdvancedFeatures } from '@/components/AdvancedFeatures';
+import { SectionRegistryProvider } from '@/hooks/useSectionRegistry';
+import { SectionObserver } from '@/components/common/SectionObserver';
 
 export default function HomePage() {
   return (
-    <AdvancedFeatures>
-      <Navbar />
-      <ScrollProgress />
-      
-      <main id="main-content" role="main">
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ExperienceSection />
-        <CertificationsSection />
-        <GitHubSection />
-        <BlogSection />
-        <TestimonialsSection />
-        <ContactSection />
-      </main>
+    <SectionRegistryProvider>
+      <AdvancedFeatures>
+        <Navbar />
+        
+        <main id="main-content" role="main" className="overflow-y-auto">
+          <SectionObserver id="hero">
+            <HeroSection />
+          </SectionObserver>
+          <SectionObserver id="about">
+            <AboutSection />
+          </SectionObserver>
+          <SectionObserver id="skills">
+            <SkillsSection />
+          </SectionObserver>
+          <SectionObserver id="projects">
+            <ProjectsSection />
+          </SectionObserver>
+          <SectionObserver id="experience">
+            <ExperienceSection />
+          </SectionObserver>
+          <SectionObserver id="certifications">
+            <CertificationsSection />
+          </SectionObserver>
+          <SectionObserver id="github">
+            <GitHubSection />
+          </SectionObserver>
+          <SectionObserver id="blog">
+            <BlogSection />
+          </SectionObserver>
+          <SectionObserver id="testimonials">
+            <TestimonialsSection />
+          </SectionObserver>
+          <SectionObserver id="contact">
+            <ContactSection />
+          </SectionObserver>
+        </main>
 
-      <Footer />
-    </AdvancedFeatures>
+        <Footer />
+      </AdvancedFeatures>
+    </SectionRegistryProvider>
   );
 }

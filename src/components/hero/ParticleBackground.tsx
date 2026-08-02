@@ -137,7 +137,7 @@ export function ParticleBackground({ className, particleCount = 150 }: { classNa
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [reducedMotion, dimensions.width, dimensions.height, mounted]);
+  }, [reducedMotion, dimensions, mounted]);
 
   useEffect(() => {
     if (!mounted) return;

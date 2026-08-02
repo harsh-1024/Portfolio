@@ -5,12 +5,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { ScrollReveal } from '@/components/common/ScrollReveal';
+// import { ScrollReveal } from '@/components/common/ScrollReveal';
 import { profile } from '@/data/profile';
 import { Mail, MapPin, Clock, Send, CheckCircle2, Loader2, Github, Linkedin, Twitter } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+
+const ScrollReveal = ({ children, className, ...props }: { children: React.ReactNode; className?: string }) => (
+  <div className={cn(className)} {...props}>{children}</div>
+);
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -85,7 +89,7 @@ export function ContactSection() {
     <section id="contact" className="section" aria-label="Contact">
       <div className="container-custom">
         {/* Section Header */}
-        <ScrollReveal variant="fadeUp" className="text-center max-w-3xl mx-auto mb-12">
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--accent-500)]/10 text-[var(--accent-500)] text-sm font-medium mb-4">
             Get In Touch
           </span>
@@ -97,7 +101,7 @@ export function ContactSection() {
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Form */}
-          <ScrollReveal variant="fadeRight" delay={100}>
+          <ScrollReveal>
             <div className="card p-6 lg:p-8" id="contact-form">
               <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-6">Send a Message</h3>
 
@@ -127,13 +131,13 @@ export function ContactSection() {
                   >
                     <div className="grid sm:grid-cols-2 gap-5">
                       <InputField
-                        label="Name"
+                        label="Your name"
                         placeholder="Your name"
                         error={errors.name?.message}
                         {...register('name')}
                       />
                       <InputField
-                        label="Email"
+                        label="your@email.com"
                         type="email"
                         placeholder="your@email.com"
                         error={errors.email?.message}
@@ -142,14 +146,14 @@ export function ContactSection() {
                     </div>
 
                     <InputField
-                      label="Subject"
+                      label="What's this about?"
                       placeholder="What's this about?"
                       error={errors.subject?.message}
                       {...register('subject')}
                     />
 
                     <TextareaField
-                      label="Message"
+                      label="Tell me about your project, idea, or just say hi..."
                       placeholder="Tell me about your project, idea, or just say hi..."
                       error={errors.message?.message}
                       rows={5}
@@ -192,7 +196,7 @@ export function ContactSection() {
           </ScrollReveal>
 
           {/* Contact Info */}
-          <ScrollReveal variant="fadeLeft" delay={200}>
+          <ScrollReveal>
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-[var(--text-primary)]">Let's Connect</h3>
               
@@ -282,7 +286,7 @@ function InputField({
     <div className="input-wrapper relative">
       <input
         type={type}
-        placeholder={placeholder}
+        placeholder=" "
         className={cn(
           'input-field',
           error && 'border-red-500 focus:ring-red-500',
@@ -321,7 +325,7 @@ function TextareaField({
   return (
     <div className="input-wrapper relative">
       <textarea
-        placeholder={placeholder}
+        placeholder=" "
         rows={rows}
         className={cn(
           'input-field resize-y min-h-[120px]',

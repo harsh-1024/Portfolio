@@ -14,10 +14,12 @@ interface LoadingScreenProps {
 export function LoadingScreen({ minDuration = 800, children }: LoadingScreenProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const startTime = useRef<number>(Date.now());
   const unmountedRef = useRef(false);
 
   useEffect(() => {
+    setMounted(true);
     const timer = setTimeout(() => {
       const elapsed = Date.now() - startTime.current;
       const remaining = Math.max(0, minDuration - elapsed);
@@ -38,7 +40,7 @@ export function LoadingScreen({ minDuration = 800, children }: LoadingScreenProp
     };
   }, [minDuration]);
 
-  if (!showLoader) return null;
+  if (!mounted || !showLoader) return null;
 
   return (
     <AnimatePresence mode="popLayout">

@@ -17,6 +17,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -36,6 +38,8 @@
   body {
     @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   ::selection {
@@ -144,17 +148,28 @@
   }
 
   .input-field {
-    @apply w-full px-4 py-3.5 bg-[var(--surface)] border border-[var(--border-light)] rounded-xl text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-500)] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply w-full px-4 py-4 bg-[var(--surface)] border border-[var(--border-light)] rounded-xl text-[var(--text-primary)] placeholder-transparent transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-500)] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .input-wrapper {
+    @apply w-full relative;
   }
 
   .label-floating {
-    @apply absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] transition-all duration-200 pointer-events-none origin-left;
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] transition-all duration-200 pointer-events-none origin-left text-sm;
   }
 
   .input-wrapper:focus-within .label-floating,
   .input-wrapper:has(input:not(:placeholder-shown)) .label-floating,
   .input-wrapper:has(textarea:not(:placeholder-shown)) .label-floating {
-    @apply -translate-y-6 scale-90 text-[var(--accent-500)];
+    @apply -translate-y-7 scale-90 text-[var(--accent-500)];
+  }
+
+  /* Add padding-top when label floats to prevent text overlap */
+  .input-wrapper:focus-within .input-field,
+  .input-wrapper:has(input:not(:placeholder-shown)) .input-field,
+  .input-wrapper:has(textarea:not(:placeholder-shown)) .input-field {
+    @apply pt-7 pb-2;
   }
 
   .tag {
